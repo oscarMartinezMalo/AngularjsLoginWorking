@@ -1,0 +1,136 @@
+<!-- Trigger the modal with a button -->
+
+<!--<button type="button" class="btn btn-info btn-lg"   id="showModal">Open Modal</button> -->
+
+ <form name="myForm" id="onlyForm" novalidate>
+        <!-- Modal -->
+        <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+        <!-- Modal content-->
+                <div class="modal-content">
+                        <!--This is the header section-->
+                        <div class="modal-header">
+                                <button id="closeSignIN" type="button" class="close" data-dismiss="modal">&times;</button>
+                                <!--<h4 class="modal-title"></h4>-->    
+                                <img id="logo" class="img-responsive img-rounded" src="diamond.jpg" alt="Logo">
+                        </div>
+
+                        <!--This is the body-->
+                        <div class="modal-body">
+                                <div class="btn-group btn-group-justified" data-toggle="buttons">
+                                        <!--The event click change the method to execute in the button Form-->
+                                        <label ng-click="myVar = 'showSignUp'; actionMethod= 'signUserUp' " class="btn btn-primary active">
+                                                <input type="radio" checked autocomplete="off" checked>SignUp
+                                        </label>
+                                        <label ng-click="myVar = 'showSignIn'; actionMethod= 'loginUser'" class="btn btn-primary">
+                                                <input type="radio" autocomplete="off">SignIn
+                                        </label>
+                                </div>
+
+                                <div ng-switch="myVar">
+                                        <!--Switch this block show label in input from SignUp-->
+                                        <div ng-switch-when="showSignUp">
+
+                                                <!--<h2 class="text-center">Sign Up</h2>-->
+                                                        <div class="form-group ">
+                                                                <div  class="form-group has-feedback" ng-class="{'has-success': myForm.overwrittenEmail.$valid,'has-error': myForm.overwrittenEmail.$invalid }">
+                                                                        <!--<label for="overwrittenEmail">Email</label>-->
+                                                                        <div class="alert alert-warning" ng-show="userTaken"  style="color:red">User <i style="color:black">{{userTakenName}}</i> Taken choose another one</div>
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                                                                                <input  type="email" ng-paste="$event.preventDefault()" overwrite-email name="overwrittenEmail"  class="form-control" ng-model="signUpInfo.username" placeholder="Email" required minlength="7" maxlength="35" />
+                                                                                <!--<input clean-user-repeat="{{userTaken}}" ng-focus="true" type="email" ng-paste="$event.preventDefault()" overwrite-email name="overwrittenEmail"  class="form-control" ng-model="signUpInfo.username" placeholder="Email" required minlength="7" maxlength="35" />-->
+                                                                                <!--<span class="glyphicon glyphicon-ok form-control-feedback " ng-show="myForm.overwrittenEmail.$valid" aria-hidden="true">-->
+                                                                                <span ng-show="myForm.overwrittenEmail.$dirty || myForm.overwrittenEmail.$touched" class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': myForm.overwrittenEmail.$valid, 'glyphicon-remove': myForm.overwrittenEmail.$invalid }" aria-hidden="true"></span>
+                                                                        </div>
+                                                                        <div ng-messages="myForm.overwrittenEmail.$error" >
+                                                                                <div class="alert alert-danger"  ng-message="required" ng-if=" myForm.overwrittenEmail.$dirty || myForm.overwrittenEmail.$touched || myForm.$submitted" >Required</div>
+                                                                                <div class="alert alert-danger" ng-message="email" style="color:red">Must be a valid email address.</div>  
+                                                                                <div class="alert alert-danger" ng-message="minlength" style="color:red">At least 7 characters long.</div>
+                                                                                <div class="alert alert-danger" ng-message="maxlength" style="color:red">At most 35 characters long.</div>                                                                               
+
+                                                                        </div>                                                                
+                                                                </div>
+
+
+                                                                <div  class="form-group">
+                                                                        <!--<label for="reEmail">Re-Enter Email</label>-->
+
+                                                                        <div class="input-group" ng-class="{'has-success': myForm.reEmail.$valid,'has-error': myForm.reEmail.$invalid }">
+                                                                                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon2"></span>
+                                                                                <input type="email" overwrite-email ng-paste="$event.preventDefault()"  name="reEmail" class="form-control" ng-model="signUpInfo.reusername" placeholder="Re-Enter Email" required minlength="7" maxlength="35" compare-to="signUpInfo.username"  />
+                                                                                <span ng-show="myForm.reEmail.$dirty || myForm.reEmail.$touched " class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': myForm.reEmail.$valid, 'glyphicon-remove': myForm.reEmail.$invalid}" aria-hidden="true"></span>
+ 
+                                                                        </div>
+                                                                                <div ng-messages="myForm.reEmail.$error" role="alert">
+                                                                                        <div class="alert alert-danger" ng-message="required" ng-if=" myForm.reEmail.$dirty || myForm.reEmail.$touched || myForm.$submitted" >Required</div>
+                                                                                        <div class="alert alert-danger" ng-message="email" style="color:red">Must be a valid email address.</div>  
+                                                                                        <div class="alert alert-danger" ng-message="minlength" style="color:red">At least 7 characters long.</div>
+                                                                                        <div class="alert alert-danger" ng-message="maxlength" style="color:red">At most 35 characters long.</div>
+                                                                                        <div class="alert alert-danger" ng-message="compareTo" ng-if=" myForm.reEmail.$dirty || myForm.reEmail.$touched || myForm.$submitted"  style="color:red">Do not mach the User</div>
+                                                                                </div>                                                               
+                                                                </div>
+
+                                                                <div  class="form-group" ng-class="{'has-success': myForm.myPassword.$valid,'has-error': myForm.myPassword.$invalid }">
+                                                                        <!--<label for="myPassword">Password</label>-->
+
+                                                                        <div class="input-group">
+                                                                                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon3"></span>
+                                                                                <input  type="password" name="myPassword" class="form-control" ng-model="signUpInfo.password" placeholder="Password" required minlength="8" maxlength="20" ng-pattern="/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d!$%@#£€*?&]{8,}$/" />
+                                                                                <span ng-show="myForm.myPassword.$dirty || myForm.myPassword.$touched" class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': myForm.myPassword.$valid, 'glyphicon-remove': myForm.myPassword.$invalid, }" aria-hidden="true"></span>
+
+                                                                        </div>
+                                                                        <div  ng-messages="myForm.myPassword.$error" >
+                                                                                <div class="alert alert-danger" ng-message="required" ng-if=" myForm.myPassword.$dirty || myForm.myPassword.$touched || myForm.$submitted" >Required</div>
+                                                                                <div class="alert alert-danger" ng-message="minlength " style="color:red" >At least 8 characters long.</div>
+                                                                                <div class="alert alert-danger" ng-message="maxlength" style="color:red">At most 20 characters long.</div>
+                                                                                <div class="alert alert-danger" ng-message="pattern" style="color:red">At least 1 Alphabet and 1 Number</div>
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                        </div>
+                                        
+                                <!--Switch this block show label in input from SignIn-->
+                                        <div ng-switch-when="showSignIn">
+                                                <div class="alert alert-warning" ng-show="userPassNotExit"  style="color:red">Wrong Email or Password</div>
+                                                <!--<h2 class="text-center">Log In</h2>-->
+                                                <div class="form-group">
+                                                        <!--<label for="myEmail">Email</label>-->
+                                                        <div class="input-group" ng-class="{'has-success': myForm.myEmail.$valid,'has-error': myForm.myEmail.$invalid }">
+                                                                <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon4"></span>
+                                                                <input type="email" overwrite-email  class="form-control" name="myEmail" placeholder="Email" ng-model="loginInfo.username" required >
+                                                                <span ng-show="myForm.myEmail.$dirty || myForm.myEmail.$touched" class="glyphicon form-control-feedback"  ng-class="{'glyphicon-ok': myForm.myEmail.$valid, 'glyphicon-remove': myForm.myEmail.$invalid}" aria-hidden="true"></span>
+
+                                                        </div>
+                                                        <div ng-messages="myForm.myEmail.$error" ng-messages-multiple >
+                                                                <div class="alert alert-danger" ng-message="required" ng-if=" myForm.myEmail.$dirty || myForm.myEmail.$touched || myForm.$submitted" style="color:red">Required</div>
+                                                                <div class="alert alert-danger" ng-message="email" style="color:red">This field must be a valid email address.</div>  
+                                                                <div class="alert alert-danger" ng-message="minlength" style="color:red">This field can be at least 7 characters long.</div>
+                                                                <div class="alert alert-danger" ng-message="maxlength" style="color:red">This field can be at most 35 characters long.</div>
+                                                        </div>
+                                                </div>
+                                                
+                                                <div class="form-group" ng-class="{'has-success': myForm.passwordmyEmail.$valid,'has-error': myForm.password.$invalid }">
+                                                        <!--<label for="password" >Password</label>-->
+                                                        <div class="input-group">
+                                                                <span class="input-group-addon glyphicon glyphicon-lock" id="basic-addon3"></span>
+                                                                <input type="password" class="form-control" ng-model="loginInfo.password" placeholder="Password" required>
+                                                         </div>
+                                                </div>
+                                                <a href="#" class="text-center block">Don't remember your password?</a>       
+                                        </div>
+                                </div>  
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-primary btn-block btn-lg buttonBottom" ng-disabled="myForm.$invalid" ng-click="this[actionMethod]()" >
+                                <span class="glyphicon glyphicon-menu-right glyphicon-circle"></span>
+                                </button>    
+                        </div>
+                </div>
+
+        </div>
+        </div>
+</form>
+
+<h1>Hola mundo</h1>

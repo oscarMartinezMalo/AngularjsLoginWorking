@@ -1,0 +1,32 @@
+
+.form-control-feedback {
+        z-index: 10;
+}
+div.floatingError{
+        position:absolute;
+}
+.alert {
+        padding: 0px;
+        margin: 5px; 
+}
+button.buttonBottom,img#logo{
+        border-radius: 0px;
+}
+.modal-footer, .modal-header{
+        padding: 0px;
+}
+#closeSignIN{
+        padding:2px;
+        position:absolute;
+        color: white;
+        right:0;
+}
+.form-group{
+        margin-top:10px;
+}
+.glyphicon{
+        top: 0;
+}
+.alert{
+        padding-left:7px;
+}

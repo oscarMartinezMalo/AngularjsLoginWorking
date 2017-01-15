@@ -1,0 +1,17 @@
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">Icon</a>
+        </div>
+        <ul class="nav navbar-nav">
+            <li><a href="#" class="active btn-link btn-lg btn-block">Home</a></li>
+            <li><a href="#" class="btn-link btn-lg btn-block"> Jewelry</a></li>
+            <li><a href="#" class="btn-link btn-lg block"> Contact</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><button type="button" class="glyphicon glyphicon-log-in btn-link btn-lg" ng-click="login()" ng-if="!isAuthenticated"> LogIn</button></li>
+            <li><button type="button" class="glyphicon glyphicon-log-out btn-link btn-lg" ng-click="logout()" ng-if="isAuthenticated"> LogOut</button></li>
+            <li><button type="button" class="glyphicon glyphicon glyphicon-user btn-link btn-lg"> {{profile}}</button></li>
+        </ul>
+    </div>
+</nav>
