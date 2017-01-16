@@ -32,33 +32,6 @@ app.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $u
 // this do the Login and Logout
 app.controller('mainController', function ($scope, $state, $http, AuthenticationService) {
 
-  // //this shows the login Modal
-  // $scope.login = function () {
-  //   $("#myModal").modal("show");
-  // };
-
-  // var token;
-  // if (localStorage['token']) {
-  //   token = localStorage['token'];
-  // } else {
-  //   token = "Something";
-  // }
-
-  // AuthenticationService.checkToken(token);
- 
-  // // this Logout the User
-  // $scope.logout = function () {
-  //   var data = {
-  //     token: token
-  //   }
-
-  //   $http.post('endpoints/logout.php', data).success(function (response) {
-  //     localStorage.clear();
-  //     $state.go("login");
-  //   }).error(function (error) {
-  //     console.error(error);
-  //   });
-  // };
 
 });
 
@@ -113,7 +86,7 @@ app.directive('focusMe', function ($timeout, $parse) {
         console.log('value=', value);
         if (value === true) {
           $timeout(function () {
-            alert(element[0]);
+           // alert(element[0]);
             element[0].focus();
           });
         }

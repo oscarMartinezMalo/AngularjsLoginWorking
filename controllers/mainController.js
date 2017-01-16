@@ -6,10 +6,8 @@ app.controller("MainController", function ($scope,$state, $http, AuthenticationS
      token = "Something";
  }
 
-   // AuthenticationService.checkToken(token);
     AuthenticationService.checkToken(function (userConfirmed) {
-            //set the user name in the taskbar
-           
+            //set the user name in the taskbar           
             $scope.isAuthenticated = userConfirmed;
         });
     $scope.logout = function(){
